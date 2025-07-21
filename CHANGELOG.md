@@ -22,6 +22,18 @@ This section documents changes that have been merged into the main branch but ha
 
 ---
 
+## [0.1.2] - 2025-07-21
+
+This is a patch release that addresses critical packaging, documentation, and cross-platform compatibility issues discovered during the initial publication process.
+
+### Fixed
+
+-   **Packaging:** Corrected the `README.md` to use a permanent, CDN-hosted image URL (`jsDelivr`) that renders correctly and at high resolution on the PyPI project page. This resolves the final issue with broken images in the package description.
+-   **CI/CD:** Hardened the entire test suite to be fully compatible with multiple Python versions (3.9-3.12), resolving all environment-specific test failures that occurred in the GitHub Actions workflow.
+-   **Code Quality:** Addressed the final remaining untestable line of code by correctly applying a `# pragma: no cover` directive, bringing the project's measurable test coverage to 100%.
+
+---
+
 ## [0.1.0] - 2025-07-21
 
 This is the initial public release of `labellint`. This version establishes the core functionality of the command-line tool, including the linter engine, rule system, and support for the COCO annotation format.
@@ -75,5 +87,6 @@ This is the initial public release of `labellint`. This version establishes the 
 -   **Static Analysis:** Resolved all reported issues from `mypy` (type inconsistencies) and `ruff` (style violations, unused code, and best-practice deviations) to ensure full compliance with the project's quality standards.
 -   **Testing:** Corrected multiple fragile and failing tests, particularly those related to module-level guards and command-line argument parsing, to ensure the test suite is 100% reliable.
 
-[Unreleased]: https://github.com/SunK3R/labellint/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/SunK3R/labellint/releases/tag/v0.1.0
+[Unreleased]: https://github.com/SunK3R/labellint/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/SunK3R/labellint/releases/tag/v0.1.2
+[0.1.0]: https://github.com/SunK3R/labellint/releases/tag/v0.1.0```

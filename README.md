@@ -130,6 +130,6 @@ This is a new tool solving an old problem. Bug reports, feature requests, and pu
 
 ## Changelog
 
-Project updates and version history are documented in the [`CHANGELog.md`](./CHANGELOG.md) file.
+Project updates and version history are documented in the [`CHANGELog.md`](https://github.com/SunK3R/labellint/blob/main/CHANGELOG.md) file.
 
 ---
