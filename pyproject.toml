@@ -1,0 +1,215 @@
+# ==============================================================================
+# labellint: Project Constitution (pyproject.toml)
+#
+# This file is the single source of truth for the `labellint` project. It
+# defines everything from core metadata and dependencies to the configurations
+# for our quality assurance toolchain (linting, formatting, type checking,
+# and testing). Adherence to this configuration is non-negotiable.
+#
+# It follows the PEP 621 standard for project metadata.
+# ==============================================================================
+
+[build-system]
+# Specifies the build backend that packaging tools like `pip` will use to
+# create distribution packages (wheels, sdists). `setuptools` is the
+# industry standard, robust and reliable.
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+# ------------------------------------------------------------------------------
+# Core Project Metadata (PEP 621)
+# https://peps.python.org/pep-0621/
+# ------------------------------------------------------------------------------
+name = "labellint"
+version = "0.1.0"
+description = "A high-precision CLI for finding errors in your computer vision annotation files before you waste GPU hours."
+readme = "README.md"
+requires-python = ">=3.9"
+
+# The modern, unambiguous way to declare a license.
+license = "MIT"
+
+authors = [
+    { name = "Sooraj K R", email = "soorajkr03@gmail.com" },
+]
+keywords = [
+    "computer-vision",
+    "annotations",
+    "linter",
+    "quality-assurance",
+    "data-validation",
+    "mlops",
+    "coco",
+    "yolo",
+    "pascal-voc",
+    "pydantic",
+    "cli",
+]
+classifiers = [
+    # See https://pypi.org/classifiers/
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+
+# ------------------------------------------------------------------------------
+# Dependencies
+# Core dependencies are pinned with `>` and `<` to allow for non-breaking
+# patch/minor updates while preventing breaking major version changes.
+# ------------------------------------------------------------------------------
+dependencies = [
+    # For a beautiful, robust CLI without boilerplate. `[all]` includes `rich`.
+    "typer[all]>=0.9.0,<1.0.0",
+
+    # For powerful, declarative data validation of annotation schemas.
+    "pydantic>=2.0.0,<3.0.0",
+
+    # For beautiful, structured terminal output. Although included in `typer[all]`,
+    # specifying it explicitly makes the dependency clear.
+    "rich>=13.0.0,<14.0.0",
+
+    # For efficient numerical operations a
+    "numpy>=1.24.0,<2.4.0",
+]
+
+[project.optional-dependencies]
+# Dependencies for development: testing, linting, formatting, and type checking.
+# Install with: `pip install -e ".[dev]"`
+dev = [
+    "pytest>=7.0.0,<9.0.0",      # The premier Python testing framework.
+    "pytest-cov>=4.0.0,<6.0.0",  # `pytest` plugin for code coverage analysis.
+    "ruff>=0.1.0,<0.6.0",        # The all-in-one linter and formatter.
+    "mypy>=1.0.0,<2.0.0",        # The canonical static type checker for Python.
+]
+
+# ------------------------------------------------------------------------------
+# Entry Points
+# ------------------------------------------------------------------------------
+[project.scripts]
+# This creates the `labellint` command in the user's shell upon installation,
+# mapping it to the `app` object within the `labellint.main` module.
+labellint = "labellint.main:app"
+
+[project.urls]
+Homepage = "https://github.com/SunK3R/labellint"
+Repository = "https://github.com/SunK3R/labellint"
+"Bug Tracker" = "https://github.com/SunK3R/labellint/issues"
+Documentation = "https://github.com/SunK3R/labellint/blob/main/README.md"
+License = "https://github.com/SunK3R/labellint/blob/main/LICENSE"
+
+
+# ==============================================================================
+# Tool Configurations
+# ==============================================================================
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = { find = { where = ["src"] } }
+
+[tool.ruff]
+# Configuration for the `ruff` linter.
+# https://docs.astral.sh/ruff/configuration/
+line-length = 88
+target-version = "py38"
+
+# A curated set of rules for maximum code quality.
+# E, F, W: Standard pycodestyle/flake8 checks.
+# I: isort for import sorting.
+# C90: McCabe complexity checks.
+# N: Pep8 naming conventions.
+# UP: pyupgrade rules.
+# B: flake8-bugbear for finding likely bugs.
+# A: flake8-builtins for preventing shadowing.
+# RUF: Ruff-specific rules.
+lint.select = ["E", "F", "W", "I", "C90", "N", "UP", "B", "A", "RUF"]
+lint.ignore = [
+    # Handled by `ruff format`
+    "E501",
+    # Function call in default argument is idiomatic for Typer/FastAPI.
+    "B008",
+]
+
+[tool.ruff.format]
+# Configuration for the `ruff` formatter, a drop-in replacement for Black.
+# https://docs.astral.sh/ruff/formatter/
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+
+[tool.mypy]
+# Configuration for the `mypy` static type checker.
+# We enforce a strict regimen. No compromises.
+# https://mypy.readthedocs.io/en/stable/config_file.html
+python_version = "3.9"
+strict = true
+
+# Additional strictness flags.
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_calls = true
+
+# For external libraries that may lack type hints.
+# This should be narrowed down as the project grows.
+ignore_missing_imports = true
+
+
+[tool.pytest.ini_options]
+# Configuration for the `pytest` test runner.
+# https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = "test_*.py"
+
+# Default command-line options for `pytest`.
+# -ra: show extra test summary info for all but passed tests.
+# --strict-markers: fail on unregistered markers.
+# --color=yes: force color output.
+# --cov: enable coverage reporting.
+addopts = "-ra --strict-markers --color=yes --cov=labellint --cov-report=term-missing"
+
+# ==============================================================================
+# Coverage.py Configuration
+# ==============================================================================
+[tool.coverage.run]
+# Specifies that we are measuring coverage for the `labellint` package.
+source = ["labellint"]
+
+[tool.coverage.report]
+# Fail the build if coverage drops below the threshold.
+fail_under = 100
+
+# This is the section that controls pragmas. The default list includes
+# "pragma: no cover", so you do not need to specify it unless you want to
+# add your own custom pragmas.
+exclude_lines = [
+    # The standard pragma to exclude lines from coverage
+    "pragma: no cover",
+
+    # Don't complain about missing return statements in functions that raise an exception
+    "raise NotImplementedError",
+    "raise AssertionError",
+
+    # Don't complain if tests don't hit the `if __name__ == "__main__":` block
+    "if __name__ == .__main__.:",
+    
+    # Don't complain about abstract methods
+    "@(abc\\.)?abstractmethod",
+]

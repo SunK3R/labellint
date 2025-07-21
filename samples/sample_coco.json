@@ -1,0 +1,228 @@
+{
+  "info": {
+    "year": 2025,
+    "version": "1.0",
+    "description": "LabelLint Sample Dataset - Intentionally Flawed for Testing",
+    "contributor": "Sooraj K R",
+    "url": "https://labellint.dev/samples/v1",
+    "date_created": "2025-07-19T10:00:00Z"
+  },
+  "licenses": [
+    {
+      "id": 1,
+      "name": "Creative Commons Attribution 4.0",
+      "url": "http://creativecommons.org/licenses/by/4.0/"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "car",
+      "supercategory": "vehicle"
+    },
+    {
+      "id": 2,
+      "name": "person",
+      "supercategory": "human"
+    },
+    {
+      "id": 3,
+      "name": "bicycle",
+      "supercategory": "vehicle"
+    },
+    {
+      "id": 4,
+      "name": "Car",
+      "supercategory": "vehicle"
+    },
+    {
+      "id": 2,
+      "name": "pedestrian",
+      "supercategory": "human"
+    },
+    {
+      "id": 6,
+      "name": "dog",
+      "supercategory": "animal"
+    }
+  ],
+  "images": [
+    {
+      "id": 1001,
+      "width": 1920,
+      "height": 1080,
+      "file_name": "scene_01.jpg",
+      "license": 1
+    },
+    {
+      "id": 1002,
+      "width": 800,
+      "height": 600,
+      "file_name": "street_view_02.jpg",
+      "license": 1
+    },
+    {
+      "id": 1003,
+      "width": 640,
+      "height": 480,
+      "file_name": "empty_road_03.jpg",
+      "license": 1
+    }
+  ],
+  "annotations": [
+    {
+      "id": 2001,
+      "image_id": 1001,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        150,
+        450,
+        300,
+        150
+      ],
+      "area": 45000,
+      "iscrowd": 0
+    },
+    {
+      "id": 2002,
+      "image_id": 1001,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        500,
+        500,
+        50,
+        120
+      ],
+      "area": 6000,
+      "iscrowd": 0
+    },
+    {
+      "id": 2003,
+      "image_id": 1002,
+      "category_id": 4,
+      "segmentation": [],
+      "bbox": [
+        800,
+        400,
+        250,
+        130
+      ],
+      "area": 32500,
+      "iscrowd": 0
+    },
+    {
+      "id": 2004,
+      "image_id": 1002,
+      "category_id": 3,
+      "segmentation": [],
+      "bbox": [
+        200,
+        450,
+        120,
+        0
+      ],
+      "area": 0,
+      "iscrowd": 0
+    },
+    {
+      "id": 2005,
+      "image_id": 1002,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        100,
+        300,
+        0,
+        150
+      ],
+      "area": 0,
+      "iscrowd": 0
+    },
+    {
+      "id": 2006,
+      "image_id": 9999,
+      "category_id": 2,
+      "segmentation": [],
+      "bbox": [
+        10,
+        10,
+        5,
+        5
+      ],
+      "area": 25,
+      "iscrowd": 0
+    },
+    {
+      "id": 2007,
+      "image_id": 1001,
+      "category_id": 99,
+      "segmentation": [],
+      "bbox": [
+        700,
+        600,
+        40,
+        40
+      ],
+      "area": 1600,
+      "iscrowd": 0
+    },
+    {
+      "id": 2008,
+      "image_id": 1002,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        50,
+        50,
+        900,
+        100
+      ],
+      "area": 90000,
+      "iscrowd": 0
+    },
+    {
+      "id": 2009,
+      "image_id": 1001,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        900,
+        800,
+        20,
+        200
+      ],
+      "area": 4000,
+      "iscrowd": 0
+    },
+    {
+      "id": 2010,
+      "image_id": 1001,
+      "category_id": 1,
+      "segmentation": [],
+      "bbox": [
+        950,
+        820,
+        25,
+        205
+      ],
+      "area": 12345,
+      "iscrowd": 0
+    },
+    {
+      "id": 2011,
+      "image_id": 1001,
+      "category_id": 6,
+      "segmentation": [],
+      "bbox": [
+        100,
+        100,
+        30,
+        30
+      ],
+      "area": 900,
+      "iscrowd": 0
+    }
+  ]
+}

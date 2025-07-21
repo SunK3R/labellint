@@ -1,0 +1,74 @@
+# ==============================================================================
+# GitHub Actions CI Workflow for the `labellint` Project
+#
+# This workflow defines the automated Continuous Integration pipeline. It is
+# designed to enforce the project's quality standards on every contribution.
+#
+# Key Principles:
+#   - Triggers: Runs automatically on pushes and pull requests to the `main` branch.
+#   - Matrix Testing: Validates the codebase against multiple Python versions
+#     to ensure broad compatibility.
+#   - Strict Quality Gates: The build will fail if any step fails, including
+#     linting, formatting checks, tests, or coverage thresholds.
+#   - Efficiency: Uses caching (via actions/setup-python) to speed up dependency
+#     installation on subsequent runs.
+# ==============================================================================
+
+name: Python CI & Quality Assurance
+
+# ------------------------------------------------------------------------------
+# Trigger Conditions
+# The workflow runs on pushes or pull requests targeting the `main` branch.
+# ------------------------------------------------------------------------------
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# ------------------------------------------------------------------------------
+# Job Definitions
+# ------------------------------------------------------------------------------
+jobs:
+  # The primary job for building, linting, and testing the application.
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9","3.10","3.11", "3.12", "3.13"]
+
+    steps:
+      # Step 1: Check out the repository's source code
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up the specific Python version for this job run
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          # Enable caching of pip dependencies to speed up subsequent builds
+          cache: 'pip'
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      
+      # Step 4: Run Type Checker
+      - name: Run type checker
+        run: |
+          mypy src
+
+      # Step 5: Run Linter and Formatter Checks
+      - name: Run linter and format checker
+        run: |
+          ruff check .
+          ruff format . --check
+
+      # Step 6: Run Tests with Coverage Analysis
+      - name: Run tests and check coverage
+        run: |
+          pytest --cov=labellint
